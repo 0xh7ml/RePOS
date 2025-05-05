@@ -3,7 +3,7 @@ RePOS is a modern Restaurant Point of Sale (POS) application built with ASP.NET,
 
 ## ToDo
 - [x] Add Views
-- [ ] Add Models
+- [x] Add Models
 - [ ] Add Contorllers
   - [ ] Auth
   - [ ] Staff Management
