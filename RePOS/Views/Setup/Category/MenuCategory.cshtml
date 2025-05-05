@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "RePOS - Menu Category";
+}
+
+@{
+    ViewData["PageName"] = "Menu Category";
+}
+
+
+@section HeaderRight {
+    <div class="float-right">
+        <div class="btn-group mr-1 mb-2">
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add-category"> Add Category </button>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Setup/Category/_AddCategory.cshtml")
+}
+
