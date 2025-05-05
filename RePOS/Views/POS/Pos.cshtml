@@ -1,0 +1,474 @@
+﻿@*
+ This Template is for showing the POS Menu.
+*@
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "RePOS - Point Of Sale";
+}
+
+<h3 class="mb-4 mt-4">Point of Sales</h3>
+
+<!-- Menu Category  & Items Tabs -->
+<div class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title">Menu</h3>
+            </div>
+        </div>
+        <!-- Card Header End -->
+
+        <div class="card-body">
+            <!-- Category Tabs -->
+            <ul class="nav nav-tabs mb-3" id="categoryTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="snacks-tab" data-bs-toggle="tab" href="#snacks" role="tab">
+                        <i class="fas fa-cookie-bite mr-1"></i> Snacks
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="burger-tab" data-bs-toggle="tab" href="#burger" role="tab">
+                        <i class="fas fa-hamburger mr-1"></i> Burger
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pizza-tab" data-bs-toggle="tab" href="#pizza" role="tab">
+                        <i class="fas fa-pizza-slice mr-1"></i> Pizza
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="drinks-tab" data-bs-toggle="tab" href="#drinks" role="tab">
+                        <i class="fas fa-glass-martini-alt mr-1"></i> Drinks
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="desserts-tab" data-bs-toggle="tab" href="#desserts" role="tab">
+                        <i class="fas fa-ice-cream mr-1"></i> Desserts
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="categoryTabsContent">
+                <!-- Snacks Tab -->
+                <div class="tab-pane fade show active" id="snacks" role="tabpanel">
+                    <div class="row">
+                        <!-- Snack Item 1 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('French Fries', 3.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="French Fries" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">French Fries</span>
+                                    <span class="info-box-number">$3.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Snack Item 2 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Onion Rings', 4.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Onion Rings" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Onion Rings</span>
+                                    <span class="info-box-number">$4.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Snack Item 3 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Chicken Nuggets', 5.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Chicken Nuggets" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Chicken Nuggets</span>
+                                    <span class="info-box-number">$5.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger Tab -->
+                <div class="tab-pane fade" id="burger" role="tabpanel">
+                    <div class="row">
+                        <!-- Burger Item 1 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Classic Burger', 8.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Classic Burger" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Classic Burger</span>
+                                    <span class="info-box-number">$8.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Burger Item 2 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Cheese Burger', 9.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Cheese Burger" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Cheese Burger</span>
+                                    <span class="info-box-number">$9.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Burger Item 3 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Double Burger', 12.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Double Burger" class="img-fluid">
+                                </span>
+                                <div class="info-box-content" onclick="addToInvoice('Double Burger', 12.99)">
+                                    <span class="info-box-text">Double Burger</span>
+                                    <span class="info-box-number">$12.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pizza Tab -->
+                <div class="tab-pane fade" id="pizza" role="tabpanel">
+                    <div class="row">
+                        <!-- Pizza Item 1 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Margherita Pizza', 14.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Margherita Pizza" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Margherita Pizza</span>
+                                    <span class="info-box-number">$14.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pizza Item 2 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Pepperoni Pizza', 16.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Pepperoni Pizza" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Pepperoni Pizza</span>
+                                    <span class="info-box-number">$16.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pizza Item 3 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Vegetarian Pizza', 15.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Vegetarian Pizza" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Vegetarian Pizza</span>
+                                    <span class="info-box-number">$15.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drinks Tab -->
+                <div class="tab-pane fade" id="drinks" role="tabpanel">
+                    <div class="row">
+                        <!-- Drink Item 1 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Soda', 2.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Soda" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Soda</span>
+                                    <span class="info-box-number">$2.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Drink Item 2 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Iced Tea', 3.49)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Iced Tea" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Iced Tea</span>
+                                    <span class="info-box-number">$3.49</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Drink Item 3 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Milkshake', 5.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Milkshake" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Milkshake</span>
+                                    <span class="info-box-number">$5.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desserts Tab -->
+                <div class="tab-pane fade" id="desserts" role="tabpanel">
+                    <div class="row">
+                        <!-- Dessert Item 1 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Ice Cream', 4.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Ice Cream" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Ice Cream</span>
+                                    <span class="info-box-number">$4.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dessert Item 2 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Chocolate Cake', 6.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Chocolate Cake" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Chocolate Cake</span>
+                                    <span class="info-box-number">$6.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Dessert Item 3 -->
+                        <div class="col-md-4 col-sm-6 col-12">
+                            <div class="info-box shadow-sm menu-item" onclick="addToInvoice('Cheesecake', 7.99)">
+                                <span class="info-box-icon bg-light">
+                                    <img src="https://placehold.co/60" alt="Cheesecake" class="img-fluid">
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Cheesecake</span>
+                                    <span class="info-box-number">$7.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- card-body end -->
+    </div> <!-- card end -->
+</div> <!-- col-md-8 end -->
+
+<!-- Order Summary Section -->
+<div class="col-md-4">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Order Summary</h3>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-striped order-table text-center">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div class="p-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span>$27.95</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="font-weight-bold">Total:</span>
+                    <span class="font-weight-bold">$27.95</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select class="form-control">
+                        <option>Cash</option>
+                        <option>Card</option>
+                        <option>Bkash</option>
+                        <option>Nagad</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-info">
+                        <i class="fas fa-print mr-1"></i> Invoice
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        Process Payment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- Order Summary End -->
+
+<!-- Custom Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize order data
+        let order = {
+            items: [],
+            subtotal: 0,
+            total: 0
+        };
+
+        // DOM elements
+        const orderTableBody = document.querySelector('.order-table tbody');
+        const subtotalElement = document.querySelector('.d-flex.justify-content-between.mb-2 span:last-child');
+        const totalElement = document.querySelector('.d-flex.justify-content-between.mb-3 span:last-child');
+        const processPaymentBtn = document.querySelector('.btn.btn-success');
+        const printInvoiceBtn = document.querySelector('.btn.btn-info');
+
+        // Add item to order
+        window.addToInvoice = function(name, price) {
+            // Check if item already exists in order
+            const existingItem = order.items.find(item => item.name === name);
+
+            if (existingItem) {
+                // Increment quantity if item exists
+                existingItem.quantity += 1;
+                existingItem.total = existingItem.quantity * existingItem.price;
+            } else {
+                // Add new item if it doesn't exist
+                order.items.push({
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    total: price
+                });
+            }
+
+            updateOrderSummary();
+        };
+
+        // Update order summary in UI
+        function updateOrderSummary() {
+            // Clear current table
+            orderTableBody.innerHTML = '';
+
+            // Reset totals
+            order.subtotal = 0;
+
+            // Add each item to the table
+            order.items.forEach(item => {
+                order.subtotal += item.total;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button class="btn btn-sm btn-default" onclick="updateQuantity('${item.name}', -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span>${item.quantity}</span>
+                            <button class="btn btn-sm btn-default" onclick="updateQuantity('${item.name}', 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>$${item.total.toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger" onclick="removeItem('${item.name}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                orderTableBody.appendChild(row);
+            });
+
+            // Update totals
+            order.total = order.subtotal; // In a real app, you might add tax here
+
+            subtotalElement.textContent = `$${order.subtotal.toFixed(2)}`;
+            totalElement.textContent = `$${order.total.toFixed(2)}`;
+
+            // Enable/disable payment button based on items
+            processPaymentBtn.disabled = order.items.length === 0;
+            printInvoiceBtn.disabled = order.items.length === 0;
+        }
+
+        // Update item quantity
+        window.updateQuantity = function(name, change) {
+            const item = order.items.find(item => item.name === name);
+
+            if (item) {
+                item.quantity += change;
+
+                // Remove item if quantity reaches 0
+                if (item.quantity <= 0) {
+                    order.items = order.items.filter(i => i.name !== name);
+                } else {
+                    item.total = item.quantity * item.price;
+                }
+
+                updateOrderSummary();
+            }
+        };
+
+        // Remove item from order
+        window.removeItem = function(name) {
+            order.items = order.items.filter(item => item.name !== name);
+            updateOrderSummary();
+        };
+
+        // Process payment
+        processPaymentBtn.addEventListener('click', function() {
+            if (order.items.length === 0) {
+                alert('Please add items to the order first.');
+                return;
+            }
+
+            const paymentMethod = document.querySelector('.form-control').value;
+            alert(`Processing $${order.total.toFixed(2)} payment via ${paymentMethod}. Order complete!`);
+
+            // Reset order after payment
+            order = {
+                items: [],
+                subtotal: 0,
+                total: 0
+            };
+            updateOrderSummary();
+        });
+
+        // Print invoice
+        printInvoiceBtn.addEventListener('click', function() {
+            if (order.items.length === 0) {
+                alert('No items in the order to print.');
+                return;
+            }
+
+            // In a real app, this would open a print dialog with a formatted invoice
+            let invoiceText = "INVOICE\n\n";
+            invoiceText += "ITEMS:\n";
+            order.items.forEach(item => {
+                invoiceText += `${item.name} x${item.quantity}: $${item.total.toFixed(2)}\n`;
+            });
+            invoiceText += `\nSUBTOTAL: $${order.subtotal.toFixed(2)}\n`;
+            invoiceText += `TOTAL: $${order.total.toFixed(2)}\n`;
+
+            alert("Invoice would be printed here:\n\n" + invoiceText);
+        });
+
+        // Initialize with empty order
+        updateOrderSummary();
+    });
+</script>

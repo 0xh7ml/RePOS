@@ -1,0 +1,91 @@
+﻿<nav class="mt-5">
+    <!-- Control sidebar content goes here -->
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+            with font-awesome or any other icon font library -->
+        <li class="nav-item">
+
+            @*
+                  URL Action Will Be Url.Action("<Action_name>", "<Controller_name>")
+            *@
+            <a href="@Url.Action("Index", "Home")" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Dashboard
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="@Url.Action("Index", "Pos")" class="nav-link">
+                <i class="nav-icon fa-solid fa-cart-shopping"></i>
+                <p>
+                    Point Of Sale
+                </p>
+            </a>
+        </li>
+        <li class="nav-item has-treeview mb-2">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fa-solid fa-chart-line"></i>
+                <p>
+                    Analytics
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <!-- Setup Link -->
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "OrderReport")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Orders Report
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item has-treeview mb-2">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fa-solid fa-gear"></i>
+                <p>
+                    Setup
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <!-- Setup Link -->
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Category")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Categories
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Item")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Items
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "PaymentMethod")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Payment Methods
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Index", "Staff")" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            Staff
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
