@@ -1,4 +1,6 @@
-﻿
+﻿@model IEnumerable<RePOS.Models.TbCategory>
+
+
 @{
     Layout = "_Layout";
     ViewData["Title"] = "RePOS - Menu Category";
@@ -17,4 +19,58 @@
     </div>
     @Html.Partial("~/Views/Setup/Category/_AddCategory.cshtml")
 }
+    
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Makes table scrollable on small screens -->
+                <table class="table table-bordered text-nowrap">
+                    <thead class="table-dark text-center">
+                        <!-- Dark header for better visibility -->
+                        <tr>
+                            <th>S/N</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-start">
+                        <!-- Loop through each category in the model and display it in a table row -->
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var category in Model)
+                            {
+                                <tr> 
+                                    <td class="text-center">@category.Id</td>
+                                    <td class="text-center">@category.Name</td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-category-@category.Id">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <!-- Category Edit Modal-->
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="handleAction('@Url.Action("Delete", "Category", new { id = category.Id })')">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @Html.Partial("~/Views/Setup/Category/_EditCategory.cshtml", category)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else{
+                        <tr>
+                            <td class="text-center" colspan="9">
+                                <h5><i class="fa fa-hdd"></i> No Menu Category!..</h5>
+                            </td>
+                        </tr>
+                        }
 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@ namespace RePOS.Controllers.Setup
         [Route("Item")]
         public IActionResult Index()
         {
-            return View("~/Views/Setup/MenuItem.cshtml");
+            return View("~/Views/Setup/Item/MenuItem.cshtml");
         }
     }
 }

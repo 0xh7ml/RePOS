@@ -1,4 +1,5 @@
-﻿<!-- Modal content-->
+﻿
+<!-- Modal content-->
 <div class="modal fade" id="add-category" tabindex="-1" aria-labelledby="add-category-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,13 +8,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form asp-action="Create" asp-controller="Category" method="post">
+                <form method="post" action="@Url.Action("Create", "Category")">
                     @Html.AntiForgeryToken()
 
                     <div class="mb-3">
-                        <label asp-for="Name" class="form-label">Menu Category</label>
-                        <input asp-for="Name" class="form-control" placeholder="Enter menu category name" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label for="Name" class="form-label text-left">Menu Category</label>
+                        <input name="Name" class="form-control" placeholder="Enter menu category name"/>
                     </div>
 
                     <button type="submit" class="btn btn-success">Save</button>
