@@ -38,10 +38,11 @@
                         <!-- Loop through each category in the model and display it in a table row -->
                         @if (Model != null && Model.Any())
                         {
+                            var counter = 1;
                             @foreach (var category in Model)
                             {
-                                <tr> 
-                                    <td class="text-center">@category.Id</td>
+                                <tr>
+                                    <td class="text-center">@counter</td>
                                     <td class="text-center">@category.Name</td>
                                     <td>
                                         <div class="text-center">
@@ -58,6 +59,7 @@
                                         @Html.Partial("~/Views/Setup/Category/_EditCategory.cshtml", category)
                                     </td>
                                 </tr>
+                                counter++;
                             }
                         }
                         else{
