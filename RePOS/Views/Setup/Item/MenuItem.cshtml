@@ -1,10 +1,11 @@
-﻿@{
-    Layout = "_Layout";
-    ViewData["Title"] = "RePOS - Menu Items";
-}
-
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model IEnumerable<RePOS.Models.TbItem>
 
 @{
+    Layout = "_Layout";
+    ViewData["Title"] = "RePOS - Menu Items";
+    var items = ViewBag.Items as List<RePOS.Models.TbItem>;
+    var categories = ViewBag.Categories as List<RePOS.Models.TbCategory>;
     ViewBag.PageName = "Menu Items";
 }
 
@@ -14,5 +15,64 @@
             <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add-item"> Add Item </button>
         </div>
     </div>
-    @Html.Partial("~/Views/Setup/Item/_AddItem.cshtml")
+    @Html.Partial("~/Views/Setup/Item/_AddItem.cshtml", categories)
 }
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Makes table scrollable on small screens -->
+                <table class="table table-bordered text-nowrap">
+                    <thead class="table-dark text-center">
+                        <!-- Dark header for better visibility -->
+                        <tr>
+                            <th>S/N</th>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-start">
+                        <!-- Loop through each category in the model and display it in a table row -->
+                        @if (items != null)
+                        {
+                            var counter = 1;
+                            @foreach (var item in items)
+                            {
+                                <tr>
+                                    <td class="text-center">@counter</td>
+                                    <td class="text-center">@item.Name</td>
+                                    <td class="text-center">@item.TbCategory?.Name</td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-item-@item.Id">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <!-- Category Edit Modal-->
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="handleAction('')">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @* @Html.Partial("~/Views/Setup/Category/_EditItem.cshtml", item) *@
+                                    </td>
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else{
+                        <tr>
+                            <td class="text-center" colspan="9">
+                                <h5><i class="fa fa-hdd"></i> No Menu Item!..</h5>
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

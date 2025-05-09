@@ -3,7 +3,6 @@
     public class TbItem
     {
         public long Id { get; set; }
-        public long Category { get; set; }
         public string Name { get; set; } = string.Empty;
         public float Price { get; set; }
 

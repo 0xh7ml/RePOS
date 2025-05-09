@@ -1,4 +1,6 @@
-﻿<!-- Modal content-->
+﻿@model IEnumerable<RePOS.Models.TbCategory>
+
+<!-- Modal content-->
 <div class="modal fade" id="add-item" tabindex="-1" aria-labelledby="add-item-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,7 +9,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="#">
+                <form method="POST" action="@Url.Action("Create", "Item")">
+                    @Html.AntiForgeryToken()
                     <div class="mb-3">
                         <label for="item.name" class="form-label">Menu item name</label>
                         <input type="text" class="form-control" name="name" placeholder="Enter item name" required>
@@ -16,9 +19,11 @@
                         <label for="menu.cat" class="form-label">Menu Category</label>
                         <select class="form-control" name="platform" required>
                             <option value="" selected>-- Select Menu category --</option>
-                            <option value="1">Cat 1</option>
-                            <option value="2">Cat 2</option>
-                   
+                            @foreach (var category in Model)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+
                         </select>
                     </div>
 

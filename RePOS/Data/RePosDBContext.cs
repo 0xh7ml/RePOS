@@ -14,8 +14,6 @@ namespace RePOS.Data
         public DbSet<TbOrder> Orders { get; set; }
         public DbSet<TbOrderItem> OrderItems { get; set; }
         public DbSet<TbStaff> Staff { get; set; }
-        public DbSet<TbRole> Roles { get; set; }
-        public DbSet<TbPermissions> Permissions { get; set; }
         public DbSet<TbPaymentMethod> PaymentMethods { get; set; }
     }
 }

@@ -47,9 +47,6 @@ namespace RePOS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("Category")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -75,9 +72,6 @@ namespace RePOS.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("PaymentMethod")
-                        .HasColumnType("bigint");
-
                     b.Property<long?>("TbPaymentMethodId")
                         .HasColumnType("bigint");
 
@@ -102,12 +96,6 @@ namespace RePOS.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("ItemId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("OrderId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("Qty")
                         .HasColumnType("bigint");
@@ -144,48 +132,6 @@ namespace RePOS.Migrations
                     b.ToTable("PaymentMethods");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbPermissions", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permissions");
-                });
-
-            modelBuilder.Entity("RePOS.Models.TbRole", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<long>("Permissions")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("TbPermissionsId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TbPermissionsId");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("RePOS.Models.TbStaff", b =>
                 {
                     b.Property<long>("Id")
@@ -206,15 +152,10 @@ namespace RePOS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Role")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("TbRoleId")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("isAdmin")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TbRoleId");
 
                     b.ToTable("Staff");
                 });
@@ -252,24 +193,6 @@ namespace RePOS.Migrations
                     b.Navigation("TbOrder");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbRole", b =>
-                {
-                    b.HasOne("RePOS.Models.TbPermissions", "TbPermissions")
-                        .WithMany("Roles")
-                        .HasForeignKey("TbPermissionsId");
-
-                    b.Navigation("TbPermissions");
-                });
-
-            modelBuilder.Entity("RePOS.Models.TbStaff", b =>
-                {
-                    b.HasOne("RePOS.Models.TbRole", "TbRole")
-                        .WithMany("Staffs")
-                        .HasForeignKey("TbRoleId");
-
-                    b.Navigation("TbRole");
-                });
-
             modelBuilder.Entity("RePOS.Models.TbCategory", b =>
                 {
                     b.Navigation("Items");
@@ -288,16 +211,6 @@ namespace RePOS.Migrations
             modelBuilder.Entity("RePOS.Models.TbPaymentMethod", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("RePOS.Models.TbPermissions", b =>
-                {
-                    b.Navigation("Roles");
-                });
-
-            modelBuilder.Entity("RePOS.Models.TbRole", b =>
-                {
-                    b.Navigation("Staffs");
                 });
 #pragma warning restore 612, 618
         }
