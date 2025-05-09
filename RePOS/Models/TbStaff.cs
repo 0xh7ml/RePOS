@@ -6,7 +6,6 @@
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public long Role { get; set; }
-        public TbRole? TbRole { get; set; } 
+        public bool isAdmin { get; set; } = false;
     }
 }
