@@ -24,14 +24,14 @@
 <body>
     <div class="login-container">
         <h2 class="text-center">Admin Login</h2>
-        <form method="POST">
+        <form method="POST" action="@Url.Action("Login", "Auth")">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text"
+                <label for="email">Email:</label>
+                <input type="email"
                        class="form-control"
-                       id="username"
-                       placeholder="Enter Username"
-                       name="username" />
+                       id="email"
+                       placeholder="Enter email"
+                       name="email" />
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>

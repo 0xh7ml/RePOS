@@ -1,0 +1,55 @@
+﻿@model RePOS.Models.Staff
+
+<!-- Edit Modal content-->
+<div class="modal fade" id="edit-staff-@Model.Id" tabindex="-1" aria-labelledby="edit-staff-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Edit Staff</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("Edit", "Staff", new { id = Model.Id })">
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label for="FullName" class="form-label">Full Name</label>
+                        <input name="FullName" class="form-control" placeholder="Enter full name" value="@Model.FullName" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input name="Email" type="email" class="form-control" placeholder="Enter email" value="@Model.Email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Password</label>
+                        <input name="Password" type="password" class="form-control" placeholder="Enter new password" value="@Model.Password" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Is Admin</label>
+                        <div class="form-check">
+                            <input name="IsAdmin" type="radio" class="form-check-input" value="true" checked="@Model.IsAdmin" />
+                            <label class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input name="IsAdmin" type="radio" class="form-check-input" value="false" checked="@(!Model.IsAdmin)" />
+                            <label class="form-check-label">No</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="form-check">
+                            <input name="Status" type="radio" class="form-check-input" value="true" checked="@Model.Status" />
+                            <label class="form-check-label">Active</label>
+                        </div>
+                        <div class="form-check">
+                            <input name="Status" type="radio" class="form-check-input" value="false" checked="@(!Model.Status)" />
+                            <label class="form-check-label">Inactive</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,18 +5,15 @@ namespace RePOS.Models
 {
     public class Item
     {
-    
         [Key]
+        [Column("id")]
         public int Id { get; set; }
-        [Required]
-        public string Name { get; set; } = string.Empty;
-        [Required]
-        public float Price { get; set; }
 
-        [ForeignKey("TbCategory")]
-        public int CategoryId { get; set; }
-        
-        public virtual Category? TbCategory { get; set; }
-        public virtual ICollection<OrderItem>? OrderItems { get; set; }
+        [Column("name")]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [Column("price")]
+        public int Price { get; set; }
     }
 }

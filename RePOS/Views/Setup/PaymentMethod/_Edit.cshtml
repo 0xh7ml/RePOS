@@ -1,20 +1,20 @@
-﻿@model RePOS.Models.Category
+﻿@model RePOS.Models.PaymentMethod
 
 <!-- Modal content-->
-<div class="modal fade" id="edit-category-@Model.Id" tabindex="-1" aria-labelledby="add-category-modal" aria-hidden="true">
+<div class="modal fade" id="edit-pm-@Model.Id" tabindex="-1" aria-labelledby="add-pm-modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">Edit Menu Category</h1>
+                <h1 class="modal-title fs-5">Edit Payment Method</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="@Url.Action("Edit", "Category", new { id = Model.Id })">
+                <form method="post" action="@Url.Action("Edit", "PaymentMethod", new { id = Model.Id })">
                     @Html.AntiForgeryToken()
 
                     <div class="mb-3">
                         <label for="Name" class="form-label">Menu Category</label>
-                        <input name="Name" class="form-control" placeholder="Enter menu category name" value="@Model.Name" />
+                        <input name="Name" class="form-control" placeholder="Cash/Bank/Card..." value="@Model.Name" />
                     </div>
 
                     <button type="submit" class="btn btn-success">Save Changes</button>

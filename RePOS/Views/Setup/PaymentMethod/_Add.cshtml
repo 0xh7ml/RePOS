@@ -1,19 +1,19 @@
 ﻿
 <!-- Modal content-->
-<div class="modal fade" id="add-category" tabindex="-1" aria-labelledby="add-category-modal" aria-hidden="true">
+<div class="modal fade" id="add-pm" tabindex="-1" aria-labelledby="add-pm" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">Add Menu Category</h1>
+                <h1 class="modal-title fs-5">Add Payment Method</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="@Url.Action("Create", "Category")">
+                <form method="post" action="@Url.Action("Create", "PaymentMethod")">
                     @Html.AntiForgeryToken()
 
                     <div class="mb-3">
-                        <label for="Name" class="form-label text-left">Menu Category</label>
-                        <input name="Name" class="form-control" placeholder="Enter menu category name"/>
+                        <label for="Name" class="form-label text-left">Payment Method</label>
+                        <input name="Name" class="form-control" placeholder="Cash/Card/Bkash..."/>
                     </div>
 
                     <button type="submit" class="btn btn-success">Save</button>

@@ -4,5 +4,94 @@
     ViewData["Title"] = "RePOS - Dashboard";
 }
 
+<div class="mt-2">
+    <h2 class="mb-4">Restaurant POS Dashboard</h2>
 
-<h1> This is our home, Bro!</h1>
+    <div class="row g-4">
+        <!-- Sales by Category -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Sales by Category (Today)
+                </div>
+                <div class="card-body">
+                    <canvas id="salesCategoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Revenue -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Daily Revenue (Last 7 Days)
+                </div>
+                <div class="card-body">
+                    <canvas id="dailyRevenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Selling Items -->
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    Top-Selling Items
+                </div>
+                <div class="card-body">
+                    <canvas id="topItemsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Sales by Category (Pie Chart)
+    new Chart(document.getElementById("salesCategoryChart"), {
+        type: 'doughnut',
+        data: {
+            labels: ["Food", "Drinks", "Desserts"],
+            datasets: [{
+                data: [450, 300, 150],
+                backgroundColor: ["#4CAF50", "#2196F3", "#FFC107"]
+            }]
+        }
+    });
+
+    // Daily Revenue (Bar Chart)
+    new Chart(document.getElementById("dailyRevenueChart"), {
+        type: 'bar',
+        data: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            datasets: [{
+                label: 'Revenue ($)',
+                data: [1200, 980, 1100, 1350, 1800, 2200, 2100],
+                backgroundColor: "#17a2b8"
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Top Selling Items (Horizontal Bar)
+    new Chart(document.getElementById("topItemsChart"), {
+        type: 'bar',
+        data: {
+            labels: ["Cheeseburger", "Pizza", "Latte", "Fried Chicken", "Ice Cream"],
+            datasets: [{
+                label: 'Quantity Sold',
+                data: [120, 90, 80, 75, 50],
+                backgroundColor: "#ff6f61"
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: { beginAtZero: true }
+            }
+        }
+    });
+</script>

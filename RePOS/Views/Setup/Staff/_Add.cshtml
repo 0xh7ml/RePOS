@@ -1,0 +1,53 @@
+﻿
+<div class="modal fade" id="add-staff" tabindex="-1" aria-labelledby="add-staff" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Add Staff</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("Create", "Staff")">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label for="FullName" class="form-label">Full Name</label>
+                        <input name="FullName" class="form-control" placeholder="Enter full name"required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input name="Email" type="email" class="form-control" placeholder="Enter email" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Password</label>
+                        <input name="Password" type="password" class="form-control" placeholder="Enter password" required />
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Is Admin</label>
+                            <div class="form-check">
+                                <input name="IsAdmin" type="radio" class="form-check-input" value="true" />
+                                <label class="form-check-label">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input name="IsAdmin" type="radio" class="form-check-input" value="false" />
+                                <label class="form-check-label">No</label>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Status</label>
+                            <div class="form-check">
+                                <input name="Status" type="radio" class="form-check-input" value="true" />
+                                <label class="form-check-label">Active</label>
+                            </div>
+                            <div class="form-check">
+                                <input name="Status" type="radio" class="form-check-input" value="false" />
+                                <label class="form-check-label">Inactive</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
