@@ -1,6 +1,6 @@
 ﻿namespace RePOS.Models
 {
-    public class TbStaff
+    public class Staff
     {
         public long Id { get; set; }
         public string FullName { get; set; } = string.Empty;

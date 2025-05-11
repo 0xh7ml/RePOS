@@ -23,7 +23,7 @@ namespace RePOS.Controllers.Setup
         [Route("Category/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TbCategory category)
+        public IActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -37,7 +37,7 @@ namespace RePOS.Controllers.Setup
 
         [Route("Category/Edit/{id}")]
         [HttpPost]
-        public IActionResult Edit(int id, TbCategory category)
+        public IActionResult Edit(int id, Category category)
         {
 
             var cat  = _context.Categories.Find(id);
