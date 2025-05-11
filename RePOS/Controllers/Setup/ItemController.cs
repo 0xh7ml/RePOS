@@ -30,7 +30,7 @@ namespace RePOS.Controllers.Setup
         [Route("Item/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TbItem item)
+        public IActionResult Create(Item item)
         {
             if (ModelState.IsValid)
             {

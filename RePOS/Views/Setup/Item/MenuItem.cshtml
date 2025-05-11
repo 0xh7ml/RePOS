@@ -1,11 +1,11 @@
 ﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
-@model IEnumerable<RePOS.Models.TbItem>
+@model IEnumerable<RePOS.Models.Item>
 
 @{
     Layout = "_Layout";
     ViewData["Title"] = "RePOS - Menu Items";
-    var items = ViewBag.Items as List<RePOS.Models.TbItem>;
-    var categories = ViewBag.Categories as List<RePOS.Models.TbCategory>;
+    var items = ViewBag.Items as List<RePOS.Models.Item>;
+    var categories = ViewBag.Categories as List<RePOS.Models.Category>;
     ViewBag.PageName = "Menu Items";
 }
 
@@ -43,7 +43,7 @@
                                 <tr>
                                     <td class="text-center">@counter</td>
                                     <td class="text-center">@item.Name</td>
-                                    <td class="text-center">@item.TbCategory?.Name</td>
+                                    <td class="text-center">@item.TbCategory.Name</td>
                                     <td>
                                         <div class="text-center">
                                             <div class="btn-group">

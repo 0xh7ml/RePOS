@@ -22,7 +22,7 @@ namespace RePOS.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RePOS.Models.TbCategory", b =>
+            modelBuilder.Entity("RePOS.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,13 +39,16 @@ namespace RePOS.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbItem", b =>
+            modelBuilder.Entity("RePOS.Models.Item", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -54,17 +57,14 @@ namespace RePOS.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<int?>("TbCategoryId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TbCategoryId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbOrder", b =>
+            modelBuilder.Entity("RePOS.Models.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -89,7 +89,7 @@ namespace RePOS.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbOrderItem", b =>
+            modelBuilder.Entity("RePOS.Models.OrderItem", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,8 +100,8 @@ namespace RePOS.Migrations
                     b.Property<long>("Qty")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("TbItemId")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("TbItemId")
+                        .HasColumnType("int");
 
                     b.Property<long?>("TbOrderId")
                         .HasColumnType("bigint");
@@ -115,7 +115,7 @@ namespace RePOS.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbPaymentMethod", b =>
+            modelBuilder.Entity("RePOS.Models.PaymentMethod", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -132,7 +132,7 @@ namespace RePOS.Migrations
                     b.ToTable("PaymentMethods");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbStaff", b =>
+            modelBuilder.Entity("RePOS.Models.Staff", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,31 +160,33 @@ namespace RePOS.Migrations
                     b.ToTable("Staff");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbItem", b =>
+            modelBuilder.Entity("RePOS.Models.Item", b =>
                 {
-                    b.HasOne("RePOS.Models.TbCategory", "TbCategory")
+                    b.HasOne("RePOS.Models.Category", "TbCategory")
                         .WithMany("Items")
-                        .HasForeignKey("TbCategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TbCategory");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbOrder", b =>
+            modelBuilder.Entity("RePOS.Models.Order", b =>
                 {
-                    b.HasOne("RePOS.Models.TbPaymentMethod", "TbPaymentMethod")
+                    b.HasOne("RePOS.Models.PaymentMethod", "TbPaymentMethod")
                         .WithMany("Orders")
                         .HasForeignKey("TbPaymentMethodId");
 
                     b.Navigation("TbPaymentMethod");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbOrderItem", b =>
+            modelBuilder.Entity("RePOS.Models.OrderItem", b =>
                 {
-                    b.HasOne("RePOS.Models.TbItem", "TbItem")
+                    b.HasOne("RePOS.Models.Item", "TbItem")
                         .WithMany("OrderItems")
                         .HasForeignKey("TbItemId");
 
-                    b.HasOne("RePOS.Models.TbOrder", "TbOrder")
+                    b.HasOne("RePOS.Models.Order", "TbOrder")
                         .WithMany("OrderItems")
                         .HasForeignKey("TbOrderId");
 
@@ -193,22 +195,22 @@ namespace RePOS.Migrations
                     b.Navigation("TbOrder");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbCategory", b =>
+            modelBuilder.Entity("RePOS.Models.Category", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbItem", b =>
+            modelBuilder.Entity("RePOS.Models.Item", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbOrder", b =>
+            modelBuilder.Entity("RePOS.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("RePOS.Models.TbPaymentMethod", b =>
+            modelBuilder.Entity("RePOS.Models.PaymentMethod", b =>
                 {
                     b.Navigation("Orders");
                 });

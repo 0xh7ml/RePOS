@@ -9,11 +9,11 @@ namespace RePOS.Data
     public class RePosDBContext: DbContext
     {
         public RePosDBContext(DbContextOptions<RePosDBContext> options) : base(options){}
-        public DbSet<TbCategory> Categories { get; set; }
-        public DbSet<TbItem> Items { get; set; }
-        public DbSet<TbOrder> Orders { get; set; }
-        public DbSet<TbOrderItem> OrderItems { get; set; }
-        public DbSet<TbStaff> Staff { get; set; }
-        public DbSet<TbPaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Staff> Staff { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
     }
 }
