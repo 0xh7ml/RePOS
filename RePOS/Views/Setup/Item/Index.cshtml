@@ -1,25 +1,19 @@
-﻿@model IEnumerable<RePOS.Models.Category>
-
+﻿@model IEnumerable<RePOS.Models.Item>
 
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "RePOS - Menu Category";
+    ViewData["Title"] = "RePOS - Menu Items";
+    ViewData["PageName"] = "Items";
 }
-
-@{
-    ViewData["PageName"] = "Menu Category";
-}
-
 
 @section HeaderRight {
     <div class="float-right">
         <div class="btn-group mr-1 mb-2">
-            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add-category"> Add Category </button>
+            <a class="btn btn-success btn-sm" href="@Url.Action("Create", "Item")"> Add Item </a>
         </div>
     </div>
-    @Html.Partial("~/Views/Setup/Category/_AddCategory.cshtml")
+
 }
-    
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -30,44 +24,47 @@
                         <!-- Dark header for better visibility -->
                         <tr>
                             <th>S/N</th>
-                            <th>Category</th>
+                            <th>Item Name</th>
+                            <th>Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-start">
-                        <!-- Loop through each category in the model and display it in a table row -->
                         @if (Model != null && Model.Any())
                         {
                             var counter = 1;
-                            @foreach (var category in Model)
+                            @foreach (var item in Model)
                             {
                                 <tr>
                                     <td class="text-center">@counter</td>
-                                    <td class="text-center">@category.Name</td>
+                                    <td class="text-center">@item.Name</td>
+                                    <td class="text-center">@item.Price.ToString() Tk</td>
                                     <td>
                                         <div class="text-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-category-@category.Id">
+                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-item-@item.Id">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
+                                                @Html.Partial("~/Views/Setup/Item/_Edit.cshtml", item)
                                                 <!-- Category Edit Modal-->
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="handleAction('@Url.Action("Delete", "Category", new { id = category.Id })')">
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="handleAction('@Url.Action("Delete", "Item", new { id = item.Id })')">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        @Html.Partial("~/Views/Setup/Category/_EditCategory.cshtml", category)
+                                        
                                     </td>
                                 </tr>
                                 counter++;
                             }
                         }
-                        else{
-                        <tr>
-                            <td class="text-center" colspan="9">
-                                <h5><i class="fa fa-hdd"></i> No Menu Category!..</h5>
-                            </td>
-                        </tr>
+                        else
+                        {
+                            <tr>
+                                <td class="text-center" colspan="5">
+                                    <h5><i class="fa fa-hdd"></i> No Data!..</h5>
+                                </td>
+                            </tr>
                         }
 
                     </tbody>

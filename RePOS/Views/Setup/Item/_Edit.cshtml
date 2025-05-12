@@ -1,0 +1,29 @@
+﻿@model RePOS.Models.Item
+
+<!-- Modal content-->
+<div class="modal fade" id="edit-item-@Model.Id" tabindex="-1" aria-labelledby="add-item-modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Edit Payment Method</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="@Url.Action("Edit", "Item", new { id = Model.Id })">
+                    @Html.AntiForgeryToken()
+
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Item name </label>
+                        <input name="Name" class="form-control" placeholder="Cash/Bank/Card..." value="@Model.Name" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Item name </label>
+                        <input name="Price" type="Number" class="form-control" placeholder="Cash/Bank/Card..." value="@Model.Price" />
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

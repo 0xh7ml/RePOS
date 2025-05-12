@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RePOS.Data;
 
@@ -10,9 +11,11 @@ using RePOS.Data;
 namespace RePOS.Migrations
 {
     [DbContext(typeof(RePosDBContext))]
-    partial class RePosDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250511202619_V1_9")]
+    partial class V1_9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

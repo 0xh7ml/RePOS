@@ -1,22 +1,20 @@
-﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
-@model IEnumerable<RePOS.Models.Item>
+﻿@model IEnumerable<RePOS.Models.Staff>
 
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "RePOS - Menu Items";
-    var items = ViewBag.Items as List<RePOS.Models.Item>;
-    var categories = ViewBag.Categories as List<RePOS.Models.Category>;
-    ViewBag.PageName = "Menu Items";
+    ViewData["Title"] = "RePOS - Staff";
+    ViewData["PageName"] = "Staff";
 }
 
 @section HeaderRight {
     <div class="float-right">
         <div class="btn-group mr-1 mb-2">
-            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add-item"> Add Item </button>
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add-staff"> Add Staff </button>
         </div>
     </div>
-    @Html.Partial("~/Views/Setup/Item/_AddItem.cshtml", categories)
+    @Html.Partial("~/Views/Setup/Staff/_Add.cshtml")
 }
+
 
 <div class="col-12">
     <div class="card">
@@ -28,46 +26,47 @@
                         <!-- Dark header for better visibility -->
                         <tr>
                             <th>S/N</th>
-                            <th>Item</th>
-                            <th>Category</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Admin</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="text-start">
                         <!-- Loop through each category in the model and display it in a table row -->
-                        @if (items != null)
+                        @if (Model != null && Model.Any())
                         {
                             var counter = 1;
-                            @foreach (var item in items)
+                            @foreach (var staff in Model)
                             {
                                 <tr>
                                     <td class="text-center">@counter</td>
-                                    <td class="text-center">@item.Name</td>
-                                    <td class="text-center">@item.TbCategory.Name</td>
+                                    <td class="text-center">@staff.FullName</td>
+                                    <td class="text-center">@staff.Email</td>
+                                    <td class="text-center">@staff.IsAdmin</td>
+                                    <td class="text-center">@staff.Status</td>
                                     <td>
                                         <div class="text-center">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-item-@item.Id">
+                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-staff-@staff.Id">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
-                                                <!-- Category Edit Modal-->
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="handleAction('')">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
+                                                @Html.Partial("~/Views/Setup/Staff/_Edit.cshtml", staff)
                                             </div>
                                         </div>
-                                        @* @Html.Partial("~/Views/Setup/Category/_EditItem.cshtml", item) *@
                                     </td>
                                 </tr>
                                 counter++;
                             }
                         }
-                        else{
-                        <tr>
-                            <td class="text-center" colspan="9">
-                                <h5><i class="fa fa-hdd"></i> No Menu Item!..</h5>
-                            </td>
-                        </tr>
+                        else
+                        {
+                            <tr>
+                                <td class="text-center" colspan="9">
+                                    <h5><i class="fa fa-hdd"></i> No Data!..</h5>
+                                </td>
+                            </tr>
                         }
 
                     </tbody>

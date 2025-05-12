@@ -1,0 +1,177 @@
+﻿@model RePOS.Dtos.OrderCreateDto
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "RePOS - Point Of Sale";
+    var items = ViewBag.Items as List<RePOS.Models.Item>;
+    var paymentMethods = ViewBag.PaymentMethods as List<RePOS.Models.PaymentMethod>;
+}
+
+<h3 class="mb-4 mt-4">Point of Sales</h3>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+<form action="/Order/Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <!-- Menu Section -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Menu</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach (var item in items)
+                        {
+                            <div class="col-md-4 col-sm-6 col-12">
+                                <div class="info-box shadow-sm menu-item" onclick="addToOrder(@item.Id, '@item.Name', @item.Price)">
+                                    <span class="info-box-icon bg-light">
+                                        <img src="https://placehold.co/60" alt="@item.Name" class="img-fluid">
+                                    </span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">@item.Name</span>
+                                        <span class="info-box-number">@item.Price.ToString("C2")</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Order Summary</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped text-center" id="orderTable">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Qty</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                    <div class="p-3">
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select name="PaymentMethodId" class="form-control" required>
+                                <option value="">Select Payment Method</option>
+                                @foreach (var pm in paymentMethods)
+                                {
+                                    <option value="@pm.Id">@pm.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Total Display -->
+                        <div class="form-group">
+                            <label>Total</label>
+                            <p id="totalDisplay" class="form-control-plaintext">0.00</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-success" id="submitOrderBtn" disabled>
+                                Submit Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden container for order items -->
+    <div id="orderItemsContainer"></div>
+</form>
+
+<script>
+    let orderItems = [];
+
+    // Add item to the order
+    function addToOrder(itemId, name, price) {
+        let existing = orderItems.find(x => x.itemId === itemId);
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            orderItems.push({ itemId, name, quantity: 1, price });
+        }
+        renderOrder();
+    }
+
+    // Remove item from the order
+    function removeItem(itemId) {
+        orderItems = orderItems.filter(x => x.itemId !== itemId);
+        renderOrder();
+    }
+
+    // Render the order and update the total
+    function renderOrder() {
+        const tbody = document.querySelector('#orderTable tbody');
+        const container = document.getElementById('orderItemsContainer');
+        const submitBtn = document.getElementById('submitOrderBtn');
+        const totalDisplay = document.getElementById('totalDisplay');
+
+        tbody.innerHTML = '';
+        container.innerHTML = '';
+        submitBtn.disabled = orderItems.length === 0;
+
+        let total = 0;
+
+        orderItems.forEach((item, index) => {
+            // Calculate total for the order
+            total += item.price * item.quantity;
+
+            // Display row
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td>
+                    <input type="number" min="1" value="${item.quantity}" onchange="updateQty(${item.itemId}, this.value)" style="width:60px;">
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="removeItem(${item.itemId})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>`;
+            tbody.appendChild(row);
+
+            // Add hidden fields for form submission
+            container.innerHTML += `
+                <input type="hidden" name="OrderItems[${index}].ItemId" value="${item.itemId}" />
+                <input type="hidden" name="OrderItems[${index}].Quantity" value="${item.quantity}" id="qty-${item.itemId}" />
+            `;
+        });
+
+        // Display the total
+        totalDisplay.textContent = total.toFixed(2);
+    }
+
+    // Update the quantity of an item
+    function updateQty(itemId, newQty) {
+        const item = orderItems.find(x => x.itemId === itemId);
+        if (item && newQty > 0) {
+            item.quantity = parseInt(newQty);
+            document.getElementById(`qty-${itemId}`).value = item.quantity;
+        }
+        renderOrder();
+    }
+</script>

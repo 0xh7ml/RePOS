@@ -1,0 +1,73 @@
+﻿@model IEnumerable<RePOS.Models.PaymentMethod>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "RePOS - Payment Methods";
+    ViewData["PageName"] = "Payment Method";
+}
+
+@section HeaderRight {
+    <div class="float-right">
+        <div class="btn-group mr-1 mb-2">
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#add-pm"> Add Payment Method </button>
+        </div>
+    </div>
+    @Html.Partial("~/Views/Setup/PaymentMethod/_Add.cshtml")
+}
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Makes table scrollable on small screens -->
+                <table class="table table-bordered text-nowrap">
+                    <thead class="table-dark text-center">
+                        <!-- Dark header for better visibility -->
+                        <tr>
+                            <th>S/N</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-start">
+                        <!-- Loop through each category in the model and display it in a table row -->
+                        @if (Model != null && Model.Any())
+                        {
+                            var counter = 1;
+                            @foreach (var payment_method in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">@counter</td>
+                                    <td class="text-center">@payment_method.Name</td>
+                                    <td>
+                                        <div class="text-center">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#edit-pm-@payment_method.Id">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <!-- Category Edit Modal-->
+                                                <button type="button" class="btn btn-danger btn-sm" onclick="handleAction('@Url.Action("Delete", "PaymentMethod", new { id = payment_method.Id })')">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @Html.Partial("~/Views/Setup/PaymentMethod/_Edit.cshtml", payment_method)
+                                    </td>
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="text-center" colspan="9">
+                                    <h5><i class="fa fa-hdd"></i> No Data!..</h5>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

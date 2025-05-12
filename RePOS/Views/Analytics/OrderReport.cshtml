@@ -1,8 +1,52 @@
 ﻿@{
     Layout = "_Layout";
-    ViewData["Title"] = "RePOS - Order Report";
+    ViewData["Title"] = "Order List";
+    ViewData["PageName"] = "Order Report";
+    var orders = ViewBag.Orders as List<RePOS.Models.Order>;
 }
 
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <!-- Makes table scrollable on small screens -->
+                <table class="table table-bordered text-nowrap">
+                    <thead class="table-dark text-center">
+                        <!-- Dark header for better visibility -->
+                        <tr>
+                            <th>S/N</th>
+                            <th>Order Id</th>
+                            <th>Total Price</th>
+                            <th>Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-start">
+                        @if (orders != null && orders.Any())
+                        {
+                            var counter = 1;
+                            @foreach (var order in orders)
+                            {
+                                <tr>
+                                    <td class="text-center">@counter</td>
+                                    <td class="text-center">@order.Id</td>
+                                    <td class="text-center">@order.Total.ToString("C")</td>
+                                    <td class="text-center">@order.PaymentMethod.Name</td>
+                                </tr>
+                                counter++;
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="text-center" colspan="4">
+                                    <h5><i class="fa fa-hdd"></i> No Data!..</h5>
+                                </td>
+                            </tr>
+                        }
 
-
-<h1> This is Order Report Page </h1>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

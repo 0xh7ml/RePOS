@@ -1,11 +1,30 @@
-﻿namespace RePOS.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace RePOS.Models
 {
     public class Staff
     {
-        public long Id { get; set; }
-        public string FullName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public bool isAdmin { get; set; } = false;
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [Column("full_name")]
+        [StringLength(255)]
+        public string FullName { get; set; }
+
+        [Column("email")] 
+        [StringLength(255)]
+        public string Email { get; set; }
+
+        [Column("password")]
+        [StringLength(255)]
+        public string Password { get; set; }
+
+        [Column("isAdmin")]
+        public bool IsAdmin { get; set; }
+
+        [Column("status")]
+        public bool Status { get; set; }
     }
 }

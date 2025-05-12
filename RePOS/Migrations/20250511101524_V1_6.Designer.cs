@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RePOS.Data;
 
@@ -10,9 +11,11 @@ using RePOS.Data;
 namespace RePOS.Migrations
 {
     [DbContext(typeof(RePosDBContext))]
-    partial class RePosDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250511101524_V1_6")]
+    partial class V1_6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace RePOS.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("RePOS.Models.Item", b =>
+            modelBuilder.Entity("RePOS.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,11 +39,37 @@ namespace RePOS.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("name");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("RePOS.Models.Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int")
+                        .HasColumnName("category");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("name");
+
                     b.Property<int>("Price")
                         .HasColumnType("int")
                         .HasColumnName("price");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Items");
                 });
@@ -56,11 +85,17 @@ namespace RePOS.Migrations
 
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int")
-                        .HasColumnName("payment_method_id");
+                        .HasColumnName("payment_method");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)")
+                    b.Property<float>("Total")
+                        .HasColumnType("real")
                         .HasColumnName("total");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("type");
 
                     b.HasKey("Id");
 
@@ -80,15 +115,15 @@ namespace RePOS.Migrations
 
                     b.Property<int>("ItemId")
                         .HasColumnType("int")
-                        .HasColumnName("item_id");
+                        .HasColumnName("item");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int")
-                        .HasColumnName("order_id");
+                        .HasColumnName("order");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("Qty")
                         .HasColumnType("int")
-                        .HasColumnName("quantity");
+                        .HasColumnName("qty");
 
                     b.HasKey("Id");
 
@@ -159,6 +194,17 @@ namespace RePOS.Migrations
                     b.ToTable("Staffs");
                 });
 
+            modelBuilder.Entity("RePOS.Models.Item", b =>
+                {
+                    b.HasOne("RePOS.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("RePOS.Models.Order", b =>
                 {
                     b.HasOne("RePOS.Models.PaymentMethod", "PaymentMethod")
@@ -179,7 +225,7 @@ namespace RePOS.Migrations
                         .IsRequired();
 
                     b.HasOne("RePOS.Models.Order", "Order")
-                        .WithMany("OrderItems")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -187,11 +233,6 @@ namespace RePOS.Migrations
                     b.Navigation("Item");
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("RePOS.Models.Order", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }
